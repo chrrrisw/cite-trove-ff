@@ -1,0 +1,24 @@
+{
+    "name": "cite-trove",
+    "fullName": "cite-trove",
+    "id": "jid1-82QR2om8OcBJTQ",
+    "description": "Adds a 'Cite Trove' context menu item on the Trove newspaper site, to allow for copying newspaper details into the clipboard.",
+    "author": "Chris Willoughby",
+    "license": "MPL 2.0",
+    "version": "0.3",
+    "preferences": [
+        {
+            "type": "control",
+            "label": "Show Help Page",
+            "name": "showHelp",
+            "title": "Help"
+        },
+        {
+            "name": "formatCitation",
+            "title": "Citation Format",
+            "description": "Allows full configuration of the citation output.\n\t%A, %U or %u for persistent, full or shortened URL\n\t%C for current time\n\t%T for newspaper title\n\t%I for issue\n\t%P for page\n\t%Q for quote of selected text.\n\t%n for new line\nAll other text copied verbatim.\nOriginal: %A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n",
+            "type": "string",
+            "value": "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n"
+        }
+    ]
+}
