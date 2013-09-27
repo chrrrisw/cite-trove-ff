@@ -1,7 +1,6 @@
-cite-trove-ff
-=============
+# cite-trove-ff #
 
-#Firefox plugin to quote Trove newspaper text
+## Firefox plugin to quote Trove newspaper text ##
 
 The [Trove Newspaper site](http://trove.nla.gov.au/newspaper?q=) allows users to correct
 newspaper OCR text for historical Australian Newspapers.
