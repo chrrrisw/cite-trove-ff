@@ -1,11 +1,13 @@
 {
     "name": "cite-trove",
     "fullName": "cite-trove",
-    "id": "jid1-82QR2om8OcBJTQ",
+    "title": "cite-trove",
+    "id": "jid1-82QR2om8OcBJTQ@jetpack",
     "description": "Adds a 'Cite Trove' context menu item on the Trove newspaper site, to allow for copying newspaper details into the clipboard.",
     "author": "Chris Willoughby",
     "license": "MPL 2.0",
-    "version": "0.3",
+    "version": "0.3.0",
+    "main" : "lib/main.js",
     "preferences": [
         {
             "type": "control",
