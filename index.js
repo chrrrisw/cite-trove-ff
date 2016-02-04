@@ -25,7 +25,9 @@ var citeTroveMenuItem = contextMenu.Item({
     label : "Cite Trove",
     context : [ contextMenu.URLContext("*.trove.nla.gov.au"),
             contextMenu.SelectionContext() ],
-    contentScriptFile : [ self.data.url("trove_select.js") ],
+    contentScriptFile : [
+        self.data.url("scraper.js"),
+        self.data.url("trove_select.js")],
     contentScript : "self.on('context', cite_trove_context_cb);"
             + "self.on('click', cite_trove_click_cb);",
     onMessage : copyCitation
