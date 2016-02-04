@@ -6,8 +6,7 @@
     "description": "Adds a 'Cite Trove' context menu item on the Trove newspaper site, to allow for copying newspaper details into the clipboard.",
     "author": "Chris Willoughby",
     "license": "MPL 2.0",
-    "version": "0.3.2",
-    "main" : "lib/main.js",
+    "version": "0.3.3",
     "preferences": [
         {
             "type": "control",
