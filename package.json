@@ -17,7 +17,7 @@
         {
             "name": "formatCitation",
             "title": "Citation Format",
-            "description": "Allows full configuration of the citation output.\n\t%A, %U or %u for persistent, full or shortened URL\n\t%C for current time\n\t%T for newspaper title\n\t%I for issue\n\t%P for page\n\t%Q for quote of selected text.\n\t%n for new line\nAll other text copied verbatim.\nOriginal: %A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n",
+            "description": "Allows full configuration of the citation output.\n\t%A, %U or %u for persistent, full or shortened URL\n\t%C for current time\n\t%T for newspaper title\n\t%I for issue\n\t%P for page\n\t%H for Article Headline\n\t%Q for quote of selected text.\n\t%n for new line\nAll other text copied verbatim.\nOriginal: %A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n",
             "type": "string",
             "value": "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n"
         }
