@@ -5,8 +5,10 @@
     "id": "jid1-82QR2om8OcBJTQ@jetpack",
     "description": "Adds a 'Cite Trove' context menu item on the Trove newspaper site, to allow for copying newspaper details into the clipboard.",
     "author": "Chris Willoughby",
-    "license": "MPL 2.0",
-    "version": "0.3.3",
+    "license": "MPL-2.0",
+    "version": "0.4.0",
+    "icon": "cite-trove-logo48.png",
+    "icon64": "cite-trove-logo64.png",
     "preferences": [
         {
             "type": "control",
