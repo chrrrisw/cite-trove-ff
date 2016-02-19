@@ -55,6 +55,26 @@ function parsePage() {
         // var element = document.querySelector('meta[property="og:site_name"]');
         // var content = element && element.getAttribute("content");
 
+        var dt_elements = document.getElementsByTagName("dt");
+        var dd_element;
+        var dt_text;
+        for (var index = 0; index < dt_elements.length; index++) {
+            dd_element = dt_elements[index].nextElementSibling;
+            dt_text = dt_elements[index].innerHTML.trim();
+            dd_text = dd_element.innerHTML.trim()
+            console.log(dt_text);
+            console.log(dd_text);
+
+            if (dt_text == 'Article identifier') {
+            } else if (dt_text == 'Page identifier') {
+            } else if (dt_text == 'APA citation') {
+            } else if (dt_text == 'MLA citation') {
+            } else if (dt_text == 'Harvard/Australian citation') {
+            } else if (dt_text == 'Wikipedia citation') {
+            }
+
+        }
+
     } else {
 
         // We have the old page
