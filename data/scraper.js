@@ -11,10 +11,16 @@ function parsePage() {
     var newspaper_issue;
 
     var pages_element;
-    var newspaper_page;
+    var newspaper_page_number;
 
     var article_element;
     var article_title;
+
+    var news_page_url;
+    var apa_ref;
+    var mla_ref;
+    var harvard_ref;
+    var wiki_ref;
 
     // Get the selected text
     var selection = window.getSelection().toString();
@@ -23,7 +29,7 @@ function parsePage() {
     var today = new Date().toString();
 
     // Get the URL
-    var page_url = location.href;
+    var url = location.href;
 
     var url_element = document.querySelector('meta[property="og:url"]');
     var persistent_url = url_element && url_element.getAttribute("content");
@@ -39,7 +45,7 @@ function parsePage() {
         newspaper_issue = issue_element && issue_element.innerHTML.trim();
 
         pages_element = document.querySelector("[ref=ndp\\:pageSelector]");
-        newspaper_page = pages_element && pages_element.innerHTML.trim();
+        newspaper_page_number = pages_element && pages_element.innerHTML.trim();
 
         article_element = document.querySelector("[ref=ndp\\:articleSelector]");
         article_title = article_element && article_element.innerHTML.trim();
@@ -67,10 +73,15 @@ function parsePage() {
 
             if (dt_text == 'Article identifier') {
             } else if (dt_text == 'Page identifier') {
+                news_page_url = dd_text;
             } else if (dt_text == 'APA citation') {
+                apa_ref = dd_text;
             } else if (dt_text == 'MLA citation') {
+                mla_ref = dd_text;
             } else if (dt_text == 'Harvard/Australian citation') {
+                harvard_ref = dd_text;
             } else if (dt_text == 'Wikipedia citation') {
+                wiki_ref = dd_text;
             }
 
         }
@@ -102,7 +113,7 @@ function parsePage() {
             if (all_options) {
                 for ( var index = 0; index < all_options.length; index++) {
                     if (all_options[index].selected) {
-                        newspaper_page = all_options[index].innerHTML.trim();
+                        newspaper_page_number = all_options[index].innerHTML.trim();
                     }
                 }
             }
@@ -115,19 +126,24 @@ function parsePage() {
 
     console.log('Title: ' + newspaper_title);
     console.log('Issue: ' + newspaper_issue);
-    console.log('Page: ' + newspaper_page);
+    console.log('Page: ' + newspaper_page_number);
     console.log('Article: ' + article_title);
 
     // Return the information gathered
     return {
         'type': 'citation',
-        'url': page_url,
+        'url': url,
         'persistent_url': persistent_url,
         'today': today,
         'title': newspaper_title,
         'issue': newspaper_issue,
-        'page': newspaper_page,
+        'page_number': newspaper_page_number,
         'article_title': article_title,
+        'news_page_url': news_page_url,
+        'apa_ref': apa_ref,
+        'mla_ref': mla_ref,
+        'harvard_ref': harvard_ref,
+        'wiki_ref': wiki_ref,
         'selection': selection
     };
 
