@@ -73,6 +73,7 @@ function parsePage() {
 
             if (dt_text == 'Article identifier') {
             } else if (dt_text == 'Page identifier') {
+                // Currently returns HTML <a> tag.
                 news_page_url = dd_text;
             } else if (dt_text == 'APA citation') {
                 apa_ref = dd_text;
