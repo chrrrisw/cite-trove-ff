@@ -1,27 +1,54 @@
 {
-    "name": "cite-trove",
-    "fullName": "cite-trove",
-    "title": "cite-trove",
-    "id": "jid1-82QR2om8OcBJTQ@jetpack",
-    "description": "Adds a 'Cite Trove' context menu item on the Trove newspaper site, to allow for copying newspaper details into the clipboard.",
-    "author": "Chris Willoughby",
-    "license": "MPL-2.0",
-    "version": "0.5.0",
-    "icon": "cite-trove-logo48.png",
-    "icon64": "cite-trove-logo64.png",
-    "preferences": [
-        {
-            "type": "control",
-            "label": "Show Help Page",
-            "name": "showHelp",
-            "title": "Help"
-        },
-        {
-            "name": "formatCitation",
-            "title": "Citation Format",
-            "description": "Allows full configuration of the citation output.\n\t%A for persistent URL\n\t%U or %u for full or shortened URL\n\t%C for current time\n\t%T for newspaper title\n\t%I for issue\n\t%P for page number\n\t%p for page URL\n\t%H for Article Headline\n\t%a for APA citation format\n\t%m for MLA citation format\n\t%h for Harvard citation format\n\t%w for Wikipedia citation format\n\t%Q for quote of selected text.\n\t%n for new line\nAll other text copied verbatim.\nOriginal: %A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n",
-            "type": "string",
-            "value": "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n"
-        }
-    ]
+  "manifest_version": 2,
+  "name": "cite-trove",
+  "version": "0.6.0",
+  "fullName": "cite-trove",
+  "title": "cite-trove",
+  "id": "jid1-82QR2om8OcBJTQ@jetpack",
+  "description": "Copies selected information from the NLA Trove Newspaper website to the clipboard.",
+  "icons": {
+    "16": "cite-trove-logo16.png",
+    "19": "cite-trove-logo19.png",
+    "32": "cite-trove-logo32.png",
+    "48": "cite-trove-logo48.png",
+    "64": "cite-trove-logo64.png",
+    "96": "cite-trove-logo96.png",
+    "128": "cite-trove-logo128.png"
+    },
+  "page_action": {
+    "default_icon": {
+      "16": "cite-trove-logo16.png",
+      "19": "cite-trove-logo19.png",
+      "32": "cite-trove-logo32.png",
+      "48": "cite-trove-logo48.png",
+      "64": "cite-trove-logo64.png",
+      "96": "cite-trove-logo96.png",
+      "128": "cite-trove-logo128.png"
+    },
+    "default_title": "Cite Trove"
+  },
+  "author": "Chris Willoughby",
+  "license": "MPL-2.0",
+  "background": {
+    "scripts": ["formatter.js", "background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://trove.nla.gov.au/*", "http://trove-beta.nla.gov.au/*"],
+      "js": ["scraper.js", "content.js"]
+    }
+  ],
+  "homepage_url": "https://chrrrisw.github.io/cite-trove-ff/",
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "clipboardWrite",
+    "contextMenus",
+    "declarativeContent",
+    "storage"
+  ]
 }
