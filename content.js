@@ -1,12 +1,25 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
+/**
+ * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * @author Chris Willoughby
+ */
 
-function cite_trove_click_cb() {
-    // Send the object back to the addon
-    self.postMessage(parsePage());
+/**
+ * The message handler for the content script.
+ * If the message is of type 'cite', parse the page and send
+ * the results back to the background script.
+ */
+function processMessage(message, sender, sendResponse) {
+    if (message.type == "cite") {
+        chrome.runtime.sendMessage(parsePage());
+    } else {
+        console.log("Unexpected message");
+    }
 }
 
-function cite_trove_context_cb() {
-    return true;
-}
+/**
+ * Add the processMessage handler as a listener for messages.
+ */
+chrome.runtime.onMessage.addListener(processMessage);
