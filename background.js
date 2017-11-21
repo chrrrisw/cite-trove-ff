@@ -6,37 +6,20 @@
  * @author Chris Willoughby
  */
 
- "use strict";
+"use strict";
 
-/**
- * The callback function for the citeTrove menu item.
- */
-function onClickHandler(info, tab) {
-    if (info.menuItemId == "citeTrove") {
-        console.log("citeTrove pressed");
-        // Must use chrome.tabs.sendMessage to send to content script.
-        chrome.tabs.sendMessage(
-            tab.id,
-            {type : "cite"});
-
-    } else {
-        console.log("Not citeTrove menu item");
-
-    }
+function onError(error) {
+    console.error(`Error: ${error}`);
 }
-
-/**
- * Add a listener for clicks in the context menu.
- */
-chrome.contextMenus.onClicked.addListener(onClickHandler);
 
 /**
  * Get the format from storage, format the citation, put it in selection.
  */
 function formatAndCopy(message) {
-    chrome.storage.sync.get({
+    browser.storage.sync.get({
         troveFormat: "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n"
-      }, function(items) {
+      }).then(function(items) {
+        console.log("background formatting");
         var input = document.createElement("textarea");
         document.body.appendChild(input);
         input.value = formatCitation(items.troveFormat, message);
@@ -44,52 +27,74 @@ function formatAndCopy(message) {
         input.select();
         document.execCommand("Copy");
         input.remove();
-
-      });
+      }, onError);
 }
 
 /**
- * Add a listener for messages from the content script.
+ * The callback function for the citeTrove menu item.
  */
-chrome.runtime.onMessage.addListener(function(message) {
-    if (message && message.type == "citation") {
-        formatAndCopy(message);
+function onClickHandler(info, tab) {
+    if (info.menuItemId == "citeTrove") {
+        console.log("citeTrove pressed");
+        // Must use browser.tabs.sendMessage to send to content script.
+        browser.tabs.sendMessage(
+            tab.id,
+            {type : "cite"}
+        ).then(response => {
+            console.log("background response");
+            console.log(response);
+            if (response && response.type == "citation") {
+                formatAndCopy(response);
+            }
+        }).catch(onError);
     }
-});
+}
+
+/**
+ * Add a listener for clicks in the context menu.
+ */
+browser.menus.onClicked.addListener(onClickHandler);
 
 /**
  * A rule to show the pageAction on the trove.nla.gov.au site.
  */
-var pageActionRule = {
-    conditions: [
-        new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { hostEquals: "trove.nla.gov.au", schemes: ["http", "https"] }
-        })
-    ],
-    actions: [ new chrome.declarativeContent.ShowPageAction() ]
-};
+// var pageActionRule = {
+//     conditions: [
+//         new chrome.declarativeContent.PageStateMatcher({
+//             pageUrl: { hostEquals: "trove.nla.gov.au", schemes: ["http", "https"] }
+//         })
+//     ],
+//     actions: [ new chrome.declarativeContent.ShowPageAction() ]
+// };
 
 /**
  * When installed set up context menu item and add a rule to show pageAction.
  */
 chrome.runtime.onInstalled.addListener(function(details) {
-    chrome.contextMenus.create({
+    browser.menus.create({
         "title" : "Cite Trove",
         "contexts" : ["selection"],
         "id" : "citeTrove",
-        "documentUrlPatterns": ["http://trove.nla.gov.au/*", "http://trove-beta.nla.gov.au/*"]
+        "documentUrlPatterns": ["http://trove.nla.gov.au/*", "https://trove.nla.gov.au/*"]
     });
 
-    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-        chrome.declarativeContent.onPageChanged.addRules([pageActionRule]);
-    });
+    // chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+    //     chrome.declarativeContent.onPageChanged.addRules([pageActionRule]);
+    // });
 });
 
 function pageActionCallback(tab) {
     // console.log("pageAction pressed");
-    chrome.tabs.sendMessage(
+    console.log("pageAction pressed");
+    // Must use browser.tabs.sendMessage to send to content script.
+    browser.tabs.sendMessage(
         tab.id,
-        {type : "cite"});
+        {type : "cite"}
+    ).then(response => {
+        if (response && response.type == "citation") {
+            formatAndCopy(response);
+        }
+    }).catch(onError);
 }
 
-chrome.pageAction.onClicked.addListener(pageActionCallback);
+browser.pageAction.onClicked.addListener(pageActionCallback);

@@ -6,10 +6,16 @@
  * @author Chris Willoughby
  */
 
-// Saves options to chrome.storage
+"use strict";
+
+function onError(error) {
+    console.error(`Error: ${error}`);
+}
+
+// Saves options to browser.storage
 function save_options() {
     var citationFormat = document.getElementById("format").value;
-    chrome.storage.sync.set({
+    browser.storage.sync.set({
         troveFormat: citationFormat
     }, function() {
         // Update status to let user know options were saved.
@@ -25,11 +31,11 @@ function save_options() {
 // stored in chrome.storage.
 function restore_options() {
     // Use default value = "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n".
-    chrome.storage.sync.get({
+    browser.storage.sync.get({
         troveFormat: "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n"
-    }, function(items) {
+    }).then(function(items) {
         document.getElementById("format").value = items.troveFormat;
-    });
+    }, onError);
 }
 
 document.addEventListener("DOMContentLoaded", restore_options);

@@ -5,7 +5,7 @@
   "applications": {
     "gecko": {
       "id": "jid1-82QR2om8OcBJTQ@jetpack",
-      "strict_min_version": "52.0"
+      "strict_min_version": "55.0"
     }
   },
   "description": "Copies selected information from the NLA Trove Newspaper website to the clipboard.",
@@ -48,7 +48,7 @@
   },
   "permissions": [
     "clipboardWrite",
-    "contextMenus",
+    "menus",
     "storage"
   ]
 }

@@ -12,8 +12,10 @@
  * the results back to the background script.
  */
 function processMessage(message, sender, sendResponse) {
+    console.log("content processMessage");
     if (message.type == "cite") {
-        chrome.runtime.sendMessage(parsePage());
+        console.log("cite message, sending response");
+        sendResponse(parsePage());
     } else {
         console.log("Unexpected message");
     }
@@ -22,4 +24,4 @@ function processMessage(message, sender, sendResponse) {
 /**
  * Add the processMessage handler as a listener for messages.
  */
-chrome.runtime.onMessage.addListener(processMessage);
+browser.runtime.onMessage.addListener(processMessage);
