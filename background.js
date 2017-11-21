@@ -32,19 +32,7 @@ function onClickHandler(info, tab) {
 browser.menus.onClicked.addListener(onClickHandler);
 
 /**
- * A rule to show the pageAction on the trove.nla.gov.au site.
- */
-// var pageActionRule = {
-//     conditions: [
-//         new chrome.declarativeContent.PageStateMatcher({
-//             pageUrl: { hostEquals: "trove.nla.gov.au", schemes: ["http", "https"] }
-//         })
-//     ],
-//     actions: [ new chrome.declarativeContent.ShowPageAction() ]
-// };
-
-/**
- * When installed set up context menu item and add a rule to show pageAction.
+ * When installed set up context menu item.
  */
 browser.runtime.onInstalled.addListener(function(details) {
     browser.menus.create({
@@ -53,19 +41,4 @@ browser.runtime.onInstalled.addListener(function(details) {
         "id" : "citeTrove",
         "documentUrlPatterns": ["http://trove.nla.gov.au/*", "https://trove.nla.gov.au/*"]
     });
-
-    // chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-    //     chrome.declarativeContent.onPageChanged.addRules([pageActionRule]);
-    // });
 });
-
-function pageActionCallback(tab) {
-    console.log("pageAction pressed");
-    // Must use browser.tabs.sendMessage to send to content script.
-    browser.tabs.sendMessage(
-        tab.id,
-        {type : "cite"}
-    ).catch(onError);
-}
-
-browser.pageAction.onClicked.addListener(pageActionCallback);

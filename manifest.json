@@ -18,19 +18,6 @@
     "96": "cite-trove-logo96.png",
     "128": "cite-trove-logo128.png"
     },
-  "page_action": {
-    "browser_style": true,
-    "default_icon": {
-      "16": "cite-trove-logo16.png",
-      "19": "cite-trove-logo19.png",
-      "32": "cite-trove-logo32.png",
-      "48": "cite-trove-logo48.png",
-      "64": "cite-trove-logo64.png",
-      "96": "cite-trove-logo96.png",
-      "128": "cite-trove-logo128.png"
-    },
-    "default_title": "Cite Trove"
-  },
   "author": "Chris Willoughby",
   "background": {
     "scripts": ["background.js"]
