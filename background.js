@@ -17,7 +17,7 @@ function onError(error) {
  */
 function onClickHandler(info, tab) {
     if (info.menuItemId == "citeTrove") {
-        console.log("citeTrove pressed");
+        // console.log("citeTrove pressed");
         // Must use browser.tabs.sendMessage to send to content script.
         browser.tabs.sendMessage(
             tab.id,

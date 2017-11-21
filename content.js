@@ -19,7 +19,6 @@ function formatAndCopy(message) {
     browser.storage.sync.get({
         troveFormat: "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n"
       }).then(function(items) {
-        console.log("content formatting");
         var input = document.createElement("textarea");
         document.body.appendChild(input);
         input.value = formatCitation(items.troveFormat, message);
@@ -36,12 +35,11 @@ function formatAndCopy(message) {
  * the results back to the background script.
  */
 function processMessage(message, sender, sendResponse) {
-    console.log("content processMessage");
+    // console.log("content processMessage");
     if (message.type == "cite") {
-        console.log("cite message, sending response");
         formatAndCopy(parsePage());
     } else {
-        console.log("Unexpected message");
+        console.error("Unexpected message");
     }
 }
 

@@ -14,7 +14,7 @@ function onError(error) {
 
 // Saves options to browser.storage
 function save_options() {
-    console.log("options save");
+    // console.log("options save");
     var citationFormat = document.getElementById("format").value;
     var storageItem = browser.storage.sync.set({
         troveFormat: citationFormat
@@ -32,7 +32,7 @@ function save_options() {
 // Restores select box and checkbox state using the preferences
 // stored in browser.storage.
 function restore_options() {
-    console.log("options restore");
+    // console.log("options restore");
     // Use default value = "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n".
     var storageItem = browser.storage.sync.get({
         troveFormat: "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n"

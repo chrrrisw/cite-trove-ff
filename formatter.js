@@ -18,7 +18,7 @@ if (typeof exports != "undefined") {
 var page_regexp = new RegExp("http://trove.nla.gov.au/newspaper/article/\\d+");
 
 function formatCitation(format, fields) {
-    console.log("formatter format", format);
+
     var copyText = format.replace(/%./g, function(match, pattern, offset, string) {
 
         // %n - Start a New line
@@ -97,6 +97,6 @@ function formatCitation(format, fields) {
         else
             return match;
     });
-    console.log(copyText);
+
     return copyText;
 }
