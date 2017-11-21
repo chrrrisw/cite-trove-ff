@@ -9,6 +9,8 @@
  * per the format specified.
  */
 
+"use strict";
+
 if (typeof exports != "undefined") {
     exports.formatCitation = formatCitation;
 }

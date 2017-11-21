@@ -33,12 +33,12 @@
   },
   "author": "Chris Willoughby",
   "background": {
-    "scripts": ["formatter.js", "background.js"]
+    "scripts": ["background.js"]
   },
   "content_scripts": [
     {
       "matches": ["http://trove.nla.gov.au/*", "https://trove.nla.gov.au/*"],
-      "js": ["scraper.js", "content.js"]
+      "js": ["formatter.js", "scraper.js", "content.js"]
     }
   ],
   "homepage_url": "https://chrrrisw.github.io/cite-trove-ff/",
