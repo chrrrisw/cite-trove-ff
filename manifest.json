@@ -28,7 +28,7 @@
       "js": ["formatter.js", "scraper.js", "content.js"]
     }
   ],
-  "homepage_url": "https://chrrrisw.github.io/cite-trove-ff/",
+  "homepage_url": "https://github.com/chrrrisw/cite-trove-ff",
   "options_ui": {
     "page": "options.html",
     "browser_style": true
