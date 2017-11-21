@@ -2,9 +2,12 @@
   "manifest_version": 2,
   "name": "cite-trove",
   "version": "0.6.0",
-  "fullName": "cite-trove",
-  "title": "cite-trove",
-  "id": "jid1-82QR2om8OcBJTQ@jetpack",
+  "applications": {
+    "gecko": {
+      "id": "jid1-82QR2om8OcBJTQ@jetpack",
+      "strict_min_version": "52.0"
+    }
+  },
   "description": "Copies selected information from the NLA Trove Newspaper website to the clipboard.",
   "icons": {
     "16": "cite-trove-logo16.png",
@@ -16,6 +19,7 @@
     "128": "cite-trove-logo128.png"
     },
   "page_action": {
+    "browser_style": true,
     "default_icon": {
       "16": "cite-trove-logo16.png",
       "19": "cite-trove-logo19.png",
@@ -28,22 +32,19 @@
     "default_title": "Cite Trove"
   },
   "author": "Chris Willoughby",
-  "license": "MPL-2.0",
   "background": {
-    "scripts": ["formatter.js", "background.js"],
-    "persistent": false
+    "scripts": ["formatter.js", "background.js"]
   },
   "content_scripts": [
     {
-      "matches": ["http://trove.nla.gov.au/*", "http://trove-beta.nla.gov.au/*"],
+      "matches": ["http://trove.nla.gov.au/*", "https://trove.nla.gov.au/*"],
       "js": ["scraper.js", "content.js"]
     }
   ],
   "homepage_url": "https://chrrrisw.github.io/cite-trove-ff/",
-  "options_page": "options.html",
   "options_ui": {
     "page": "options.html",
-    "chrome_style": true
+    "browser_style": true
   },
   "permissions": [
     "clipboardWrite",
