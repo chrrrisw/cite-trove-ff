@@ -13,24 +13,6 @@ function onError(error) {
 }
 
 /**
- * Get the format from storage, format the citation, put it in selection.
- */
-function formatAndCopy(message) {
-    browser.storage.sync.get({
-        troveFormat: "%A%n%C%n%T%n%I, page %P%n[Quote]%n%Q%n[Quote]%n"
-      }).then(function(items) {
-        console.log("background formatting");
-        var input = document.createElement("textarea");
-        document.body.appendChild(input);
-        input.value = formatCitation(items.troveFormat, message);
-        input.focus();
-        input.select();
-        document.execCommand("Copy");
-        input.remove();
-      }, onError);
-}
-
-/**
  * The callback function for the citeTrove menu item.
  */
 function onClickHandler(info, tab) {
@@ -40,13 +22,7 @@ function onClickHandler(info, tab) {
         browser.tabs.sendMessage(
             tab.id,
             {type : "cite"}
-        ).then(response => {
-            console.log("background response");
-            console.log(response);
-            if (response && response.type == "citation") {
-                formatAndCopy(response);
-            }
-        }).catch(onError);
+        ).catch(onError);
     }
 }
 
@@ -70,7 +46,7 @@ browser.menus.onClicked.addListener(onClickHandler);
 /**
  * When installed set up context menu item and add a rule to show pageAction.
  */
-chrome.runtime.onInstalled.addListener(function(details) {
+browser.runtime.onInstalled.addListener(function(details) {
     browser.menus.create({
         "title" : "Cite Trove",
         "contexts" : ["selection"],
@@ -84,17 +60,12 @@ chrome.runtime.onInstalled.addListener(function(details) {
 });
 
 function pageActionCallback(tab) {
-    // console.log("pageAction pressed");
     console.log("pageAction pressed");
     // Must use browser.tabs.sendMessage to send to content script.
     browser.tabs.sendMessage(
         tab.id,
         {type : "cite"}
-    ).then(response => {
-        if (response && response.type == "citation") {
-            formatAndCopy(response);
-        }
-    }).catch(onError);
+    ).catch(onError);
 }
 
 browser.pageAction.onClicked.addListener(pageActionCallback);
