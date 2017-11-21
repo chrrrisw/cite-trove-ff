@@ -1,9 +1,15 @@
 /**
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
  * @author Chris Willoughby
  *
  * Runs as part of the background process and formats the fields as
  * per the format specified.
  */
+
+"use strict";
 
 if (typeof exports != "undefined") {
     exports.formatCitation = formatCitation;
@@ -12,6 +18,7 @@ if (typeof exports != "undefined") {
 var page_regexp = new RegExp("http://trove.nla.gov.au/newspaper/article/\\d+");
 
 function formatCitation(format, fields) {
+
     var copyText = format.replace(/%./g, function(match, pattern, offset, string) {
 
         // %n - Start a New line
