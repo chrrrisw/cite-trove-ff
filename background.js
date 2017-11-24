@@ -32,13 +32,11 @@ function onClickHandler(info, tab) {
 browser.menus.onClicked.addListener(onClickHandler);
 
 /**
- * When installed set up context menu item.
+ * Set up context menu item.
  */
-browser.runtime.onInstalled.addListener(function(details) {
-    browser.menus.create({
-        "title" : "Cite Trove",
-        "contexts" : ["selection"],
-        "id" : "citeTrove",
-        "documentUrlPatterns": ["http://trove.nla.gov.au/*", "https://trove.nla.gov.au/*"]
-    });
+browser.menus.create({
+    "title" : "Cite Trove",
+    "contexts" : ["selection"],
+    "id" : "citeTrove",
+    "documentUrlPatterns": ["http://trove.nla.gov.au/*", "https://trove.nla.gov.au/*"]
 });
